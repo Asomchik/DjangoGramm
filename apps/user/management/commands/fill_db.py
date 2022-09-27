@@ -16,7 +16,7 @@ from apps.comment.models import Comment
 from apps.chat.models import Message
 
 
-FREEZE_TIME = 1.1
+FREEZE_TIME = 0
 
 # medium settings
 NUM_USERS = 10

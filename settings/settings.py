@@ -18,7 +18,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.getenv('SECRET_KEY_VALUE')
 DEBUG = os.getenv('DEBUG_VALUE') == 'True'
 
-ALLOWED_HOSTS = ['asomchik.herokuapp.com']
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
 
 # Register custom User Model
 AUTH_USER_MODEL = 'user.User'
@@ -39,7 +39,6 @@ INSTALLED_APPS = [
 
     'easy_thumbnails',
     'debug_toolbar',
-    'cloudinary',
 ]
 
 MIDDLEWARE = [
@@ -146,26 +145,6 @@ THUMBNAIL_ALIASES = {
 INTERNAL_IPS = [
     "127.0.0.1",
 ]
-# DB settings for Heroku
-django_heroku.settings(locals())
-
-# External storage for media_files
-CLOUDINARY_STORAGE = {
-    'CLOUD_NAME': os.getenv('CLOUD_NAME_VALUE'),
-    'API_KEY': os.getenv('API_KEY_VALUE'),
-    'API_SECRET': os.getenv('API_SECRET_VALUE'),
-}
-DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
-STATICFILES_STORAGE = 'cloudinary_storage.storage.RawMediaCloudinaryStorage'
-THUMBNAIL_DEFAULT_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
-
-# Email settings
-EMAIL_USE_TLS = True
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = 587
-EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER_VALUE')
-EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD_VALUE')
 
 # Pagination settings
 POSTS_PAGINATE_BY = 4
