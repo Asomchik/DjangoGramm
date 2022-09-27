@@ -1,0 +1,8 @@
+{% extends "base_auth.html" %}
+{% load static %}
+
+{% block content %}
+    {% for post in page_obj.object_list %}
+        {% include 'post/_post_card.html' %}
+    {% endfor %}
+{% endblock content %}

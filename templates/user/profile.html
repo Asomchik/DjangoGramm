@@ -1,0 +1,19 @@
+{% extends "base_auth.html" %}
+
+{% load thumbnail %}
+
+{% block content %}
+<h3>Profile settings</h3>
+
+<form method="post" class='profile-form' enctype="multipart/form-data">
+	{% csrf_token %}
+	{{form.as_p}}
+
+    {% if user.avatar %}
+    <p>Current avatar:</p>
+    <p><img src="{{ user.avatar|thumbnail_url:'avatar_big' }}"></p>
+    {% endif %}
+
+	<p><button type="submit">Save changes</button></p>
+</form>
+{% endblock content%}

@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block title %}
+    Djgramm
+{% endblock %}
+
+{% block header-nav %}
+    <ul>
+        <a href="/feed">
+            <li>Feed</li>
+        </a>
+        <a href="/popular">
+            <li>Popular</li>
+        </a>
+        <a href="/direct">
+            <li>Messages</li>
+        </a>
+    </ul>
+{% endblock header-nav %}
+
+{% block header-customer %}
+    <a href="/newpost">
+        <section>New post</section>
+    </a>
+    <a href="/logout">
+        <section>Log out</section>
+    </a>
+    <a href="/profile">
+        <section>Profile</section>
+    </a>
+{% endblock header-customer %}

@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block content %}
+	<div class="greeting">
+		<h3>Welcome to amazing DjangoGramm</h3>
+		<p>You are one step away from wonderful world of unreal illusions!</p>
+	</div>
+	<br>
+	<p>To see all our staff you should log in:</p>
+
+	<form method="post">
+		{% csrf_token %}
+		{{form.as_p}}
+		<button type="submit">Let me in!</button>
+	</form>
+		<br>
+
+    <p>Or <a class="btn" href="{% url 'registration' %}">register</a>
+		if you do not have an account.</p>
+{% endblock content %}

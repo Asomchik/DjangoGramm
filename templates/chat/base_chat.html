@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block title %}
+    Djgramm
+{% endblock %}
+
+{% block header-nav %}
+    <ul>
+        <a href="{% url 'feed' %}">
+            <li>Feed</li>
+        </a>
+        <a href="{% url 'direct' %}">
+            <li>Messages</li>
+        </a>
+        {% if sender_id %}
+            <a href="{% url 'create-message' pk=sender_id %}">
+                <li>New message</li>
+            </a>
+        {% else %}
+            <a href="{% url 'create-message' %}">
+                <li>New message</li>
+            </a>
+        {% endif %}
+    </ul>
+{% endblock header-nav %}
+
+{% block header-customer %}
+    <a href="{% url 'logout' %}">
+        <section>Log out</section>
+    </a>
+    <a href="{% url 'profile' %}">
+        <section>Profile</section>
+    </a>
+{% endblock header-customer %}

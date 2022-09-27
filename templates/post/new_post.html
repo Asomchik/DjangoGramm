@@ -1,0 +1,12 @@
+{% extends "base_auth.html" %}
+
+{% block content %}
+    <h3>Create your post here</h3>
+    <form action="{% url 'new-post' %}" method="post" class='new-post-form' enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <p>
+            <button type="submit">Post</button>
+        </p>
+    </form>
+{% endblock content %}

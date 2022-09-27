@@ -1,0 +1,12 @@
+{% extends "chat/base_chat.html" %}
+
+{% block content %}
+    <h2>{{ chat_title }}</h2>
+    <form method="post" class='new-mssg-form'>
+        {% csrf_token %}
+        {{ form.as_p }}
+        <p>
+            <button type="submit">Send message</button>
+        </p>
+    </form>
+{% endblock content %}

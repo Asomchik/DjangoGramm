@@ -1,0 +1,24 @@
+{% extends "base_auth.html" %}
+{% load static %}
+{% load thumbnail %}
+
+{% block content %}
+    {% include 'post/_post_card_full.html' %}
+    <form method="post" class='comment-form' action="/newcomment/{{ post.id }}/">
+        {% csrf_token %}
+        <div>
+            {{ form.text }}
+            {{ form.post }}
+        </div>
+        <button type="submit">Send comment</button>
+    </form>
+    <section class="comments" id="comments">
+        {% for comment in post.comment_set.all %}
+            <p>
+                <img src="{{ comment.user.avatar|thumbnail_url:'avatar_small' }}">
+                {{ comment.user }}: {{ comment.text }} {{ comment.date }}
+                like: {{ comment.likes.all.count }}
+            </p>
+        {% endfor %}
+    </section>
+{% endblock content %}

@@ -1,0 +1,28 @@
+{% load static %}
+{% load thumbnail %}
+<div class="message">
+    {% if phrase.sender.id == user.id %}
+        <div class="message-to">
+            <a href="{% url 'direct-user' phrase.recipient.id %}">to
+                {{ phrase.recipient }}
+                <img src="{{ phrase.sender.avatar|thumbnail_url:'avatar_small' }}">
+            </a>
+        </div>
+        <div class="message-text message-text-outbox">
+            {{ phrase.text }}
+            <div class="message-date">{{ phrase.date }}</div>
+        </div>
+    {% else %}
+        <div class="message-from">
+            <a href="{% url 'direct-user' phrase.sender.id %}">
+                <img src="{{ phrase.sender.avatar|thumbnail_url:'avatar_small' }}">
+                from
+                {{ phrase.sender }}
+            </a>
+        </div>
+        <div class="message-text message-text-inbox">
+            {{ phrase.text }}
+            <div class="message-date">{{ phrase.date }}</div>
+        </div>
+    {% endif %}
+</div>

@@ -1,0 +1,8 @@
+{% extends "chat/base_chat.html" %}
+
+{% block content %}
+    <h2>{{ chat_title }}</h2>
+    {% for phrase in page_obj.object_list %}
+        {% include 'chat/_message_card.html' %}
+    {% endfor %}
+{% endblock content %}

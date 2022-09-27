@@ -1,0 +1,22 @@
+{% load static %}
+{% load thumbnail %}
+<article class="post">
+    <div class="post-author">
+        <a href="{{ post.user.get_absolute_url }}">
+            <img src="{{ post.user.avatar|thumbnail_url:'avatar_small' }}">
+            {{ post.user }}
+        </a>
+    </div>
+    <a href="{{ post.get_absolute_url }}">
+        <div class="post-date">{{ post.date }}</div>
+        <div class="post-media">
+            {% for photo in post.mediacontent_set.all %}
+                <img src="{{ photo.content|thumbnail_url:'content_small' }}">
+            {% endfor %}
+        </div>
+        <div class="post-text">{{ post.text }}</div>
+        {% if post.likes.all.count %}
+            <div class="post-likes">{{ post.likes.all.count }} people likes this</div>
+        {% endif %}
+    </a>
+</article>

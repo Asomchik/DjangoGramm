@@ -1,0 +1,72 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css2?family=Rubik&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{% static 'main.css' %}">
+    <title>{% block title %}Djgramm{% endblock %}</title>
+</head>
+<body>
+<header>
+    <div class="container-center">
+        <nav class="header-nav">
+            {% block header-nav %}
+            {% endblock header-nav %}
+        </nav>
+        <div class="header-customer">
+            {% block header-customer %}
+                <a href="{% url 'login' %}">
+                    <section>Log in</section>
+                </a>
+                <a href="{% url 'registration' %}">
+                    <section>Registration</section>
+                </a>
+            {% endblock header-customer %}
+        </div>
+    </div>
+</header>
+<div class="container-center">
+    <div class="main">
+
+        {% if messages %}
+            {% for messege in messages %}
+                <div class="alert alert-{{ messege.tags }}">
+                    {{ messege }}
+                </div>
+            {% endfor %}
+        {% endif %}
+        <ul class="pagination">
+            {% for page in page_obj.paginator.page_range %}
+                {% if page_obj.number == page %}
+                    <a href="#" class="pagination-link">
+                        <li class="pagination-element pagination-element-current">
+                            {{ page }}
+                        </li>
+                    </a>
+                {% else %}
+                    <a href="?page={{ page }}" class="pagination-link">
+                        <li class="pagination-element">
+                            {{ page }}
+                        </li>
+                    </a>
+                {% endif %}
+            {% endfor %}
+        </ul>
+
+        {% block content %}
+        {% endblock content %}
+
+    </div>
+    <div class="sidebar">
+        {% block sidebar %}
+            {% for el in sidebar %}
+                <p>{{ el }}</p>
+                <p></p>
+            {% endfor %}
+        {% endblock sidebar %}
+    </div>
+</div>
+</body>
+</html>
