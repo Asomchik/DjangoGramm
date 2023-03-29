@@ -6,7 +6,6 @@ import os
 from pathlib import Path
 
 from dotenv import load_dotenv
-import django_heroku
 
 
 # Load secret info to environment
@@ -18,7 +17,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.getenv('SECRET_KEY_VALUE')
 DEBUG = os.getenv('DEBUG_VALUE') == 'True'
 
-ALLOWED_HOSTS = ['asomchik.herokuapp.com']
+ALLOWED_HOSTS = ['dgramm.asomchik.online']
+if DEBUG:
+    ALLOWED_HOSTS += ['127.0.0.1', 'localhost']
+CSRF_TRUSTED_ORIGINS = ['https://dgramm.asomchik.online']
 
 # Register custom User Model
 AUTH_USER_MODEL = 'user.User'
@@ -79,8 +81,12 @@ WSGI_APPLICATION = 'settings.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': os.getenv('DB_NAME_VALUE'),
+        'USER': os.getenv('DB_USER_VALUE'),
+        'PASSWORD': os.getenv('DB_PASSWORD_VALUE'),
+        'HOST': 'localhost',
+        'PORT': '5432',
     }
 }
 
@@ -118,11 +124,11 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Static files (CSS, JavaScript, Images)
 STATICFILES_DIRS = [
-    BASE_DIR / "static",
+    BASE_DIR / 'static',
 ]
 
 STATIC_URL = 'static/'
-STATIC_ROOT = BASE_DIR / 'static_collect'
+STATIC_ROOT = BASE_DIR / 'static_collected'
 
 # Media settings
 MEDIA_ROOT = BASE_DIR / 'media'
@@ -146,8 +152,6 @@ THUMBNAIL_ALIASES = {
 INTERNAL_IPS = [
     "127.0.0.1",
 ]
-# DB settings for Heroku
-django_heroku.settings(locals())
 
 # External storage for media_files
 CLOUDINARY_STORAGE = {
@@ -170,4 +174,3 @@ EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD_VALUE')
 # Pagination settings
 POSTS_PAGINATE_BY = 4
 MESSAGES_PAGINATE_BY = 6
-

@@ -54,7 +54,7 @@ header div {
 .header-nav ul li,
 .header-customer section {
     margin: 5px;
-    padding: 5px 7px;
+    padding: 5px 6px;
     background-color: rgb(170, 200, 120);
     border-radius: 5px;
     border: 2px solid white;
